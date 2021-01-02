@@ -21,7 +21,6 @@ seriesRouter.param('seriesId', (req, res, next, seriesId) => {
 });
 
 seriesRouter.get('/', (req, res, next) => {
-
     db.all("SELECT * FROM Series", (error, series) => {
         if (error) {
             next(error);
@@ -29,7 +28,10 @@ seriesRouter.get('/', (req, res, next) => {
             res.status(200).json({ series: series });
         }
     });
-
 });
+
+seriesRouter.get('/:seriesId', (req, res, next) => {
+    res.status(200).json({ series: req.series });
+})
 
 module.exports = seriesRouter;
